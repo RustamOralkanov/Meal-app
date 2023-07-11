@@ -13,8 +13,9 @@ import store from "../store";
 import axiosCLient from "../plugins/axios/axiosClient";
 
 const meals = computed(() => store.state.meals);
-const letters = "ABCDEFGHIKLMNOPQRSTVXYZ".split("");
 const ingrediets = ref([]);
+
+const letters = "ABCDEFGHIKLMNOPQRSTVXYZ".split("");
 
 onMounted(async () => {
   const response = await axiosCLient.get("list.php?i=list");

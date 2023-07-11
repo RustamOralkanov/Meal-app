@@ -1,12 +1,14 @@
 <template>
-  <div class="w-[800px] mx-auto">
-    <pre>{{ meal }}</pre>
-    <h1 class="text-5xl font-bold mb-5">{{ meal.strMeal }}</h1>
-    <img :src="meal.strMealThumb" :alt="meal.strMeal" />
-    <div class="grid grid-cols-1 md:grid-cols-3 text-lg">
+  <div class="max-w-[800px] mx-auto">
+    <h1 class="text-5xl font-bold mb-5 pt-5">{{ meal.strMeal }}</h1>
+    <img :src="meal.strMealThumb" :alt="meal.strMeal" class="max-w-[100%] w-full" />
+    <div class="grid grid-cols-1 md:grid-cols-3 text-lg mb-4 mt-2">
       <div><strong> Category:</strong> {{ meal.strCategory }}</div>
       <div><strong>Area:</strong> {{ meal.strArea }}</div>
       <div><strong>Tags:</strong> {{ meal.strTags }}</div>
+    </div>
+    <div class="my-5">
+      {{ meal.strInstructions }}
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2">
       <div>
@@ -21,12 +23,12 @@
         <h2 class="text-2xl font-semibold mb-3">Measures</h2>
         <ul>
           <template v-for="(el, ind) of new Array(20)">
-            <li v-if="meal[`strMeasure${ind + 1}`]">{{ ind + 1 }}. {{ meal[`strMeasure${ind + 1}`] }}</li>
+            <li v-if="meal[`strMeasure${ind + 1}`] !== ' '">{{ ind + 1 }}. {{ meal[`strMeasure${ind + 1}`] }}</li>
           </template>
         </ul>
       </div>
     </div>
-    <div class="mt-4">
+    <div class="mt-4 flex gap-2">
       <YouTubeButton :href="meal.strYoutube">Go to Youtube</YouTubeButton>
       <a :href="meal.strSource" class="px-3 py-2 rounded border-2 border-orange-500 bg-orange-500 hover:bg-orange-600 hover:border-orange-600 text-white transition-colors"
         >View Original Source</a
@@ -36,7 +38,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import axiosCLient from "../plugins/axios/axiosClient";
 import YouTubeButton from "../components/YouTubeButton.vue";

@@ -1,0 +1,32 @@
+<template>
+  <div class="bg-white shadow rounded-xl">
+    <router-link :to="{ name: 'mealDetails', params: { id: meal.idMeal } }">
+      <img :src="meal.strMealThumb" :alt="meal.strMeal" class="rounded-t-xl h-48 w-full object-cover" />
+    </router-link>
+    <div class="p-3">
+      <h3 class="font-semibold">{{ meal.strMeal }}</h3>
+      <p class="mb-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+      <div class="flex items-center justify-between">
+        <YouTubeButton :href="meal.strYoutube">YouTube</YouTubeButton>
+        <router-link
+          :to="{ name: 'mealDetails', params: { id: meal.idMeal } }"
+          class="px-3 py-2 rounded border-2 border-orange-500 bg-orange-500 hover:bg-orange-600 hover:border-orange-600 text-white transition-colors"
+          >View</router-link
+        >
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import YouTubeButton from "./YouTubeButton.vue";
+
+const { meal } = defineProps({
+  meal: {
+    type: Object,
+    required: true,
+  },
+});
+</script>
+
+<style lang="scss" scoped></style>
